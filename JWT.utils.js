@@ -2,12 +2,12 @@ import jwt from "jsonwebtoken";
 
 const PRIVATE_KEY = "KEY_TestPalomeroJWT";
 
-const generateToken = (user) => {
+export const generateToken = (user) => {
     const token = jwt.sing({user}, PRIVATE_KEY, {expiresIn: `24h`})
     return token;
 }
 
-const authToken = (req,res,next) => {
+export const authToken = (req,res,next) => {
     const authHeader = req.headers.authorization;
     if(!authHeader) return res.status(401).send({
         error: "Not authenticated"

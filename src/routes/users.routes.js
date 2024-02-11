@@ -1,11 +1,12 @@
 import { Router } from "express";
 import userModel from "../dao/models/user.model.js";
 import { uploader } from "../utils.js";
+import { authToken } from "../JWT.utils.js";
 
 const router = Router();
 
 //get general
-router.get("/", async (req,res) =>{
+router.get("/", authToken, async (req,res) =>{
     
     const users = await userModel.find();
 
@@ -15,7 +16,7 @@ router.get("/", async (req,res) =>{
     })
 })
 //get individual
-router.get("/:uid", async (req,res) =>{
+router.get("/:uid", authToken, async (req,res) =>{
 
     const id = req.params.uid;
     const user = await userModel.find({_id:id});
